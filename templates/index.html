@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Email Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        textarea {
+            resize: none;
+            margin: 10px 0;
+            border-radius: 8px;
+            padding: 8px;
+            font-size: 1rem;
+            font-family: Arial, sans-serif;
+        }
+        input[type="submit"], button {
+            margin-top: 10px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover, button:hover {
+            background-color: #0056b3;
+        }
+        #spinner {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>AI Email Assistant</h2>
+    <form method="post" onsubmit="showSpinner()">
+        <label for="email_type">Select Email Type:</label>
+        <select name="email_type" id="email_type">
+            <option value="apology">Apology</option>
+            <option value="meeting">Meeting Request</option>
+            <option value="complaint">Complaint</option>
+            <option value="thank_you">Thank You</option>
+            <option value="follow_up">Follow-up</option>
+            <option value="custom">Custom</option>
+        </select><br><br>
+
+        <textarea name="prompt" rows="5" cols="50" placeholder="e.g., Apologize for missing a deadline."></textarea><br>
+        <input type="submit" value="Generate">
+        <div id="spinner">⏳ Generating...</div>
+    </form>
+
+    <h3>Response:</h3>
+    <textarea id="resultText" rows="10" cols="60">{{ result }}</textarea><br>
+    <button type="button" onclick="copyText()">Copy</button>
+
+    <script>
+        function copyText() {
+        const textArea = document.getElementById("resultText");
+        textArea.select();
+        textArea.setSelectionRange(0, 99999); // For mobile support
+
+        try {
+           const successful = document.execCommand("copy");
+           if (successful) {
+              alert("Copied to clipboard!");
+           } else {
+              alert("Copy failed. Please copy manually.");
+           }
+        } catch (err) {
+           alert("Browser does not support clipboard copy.");
+        }
+    }
+    </script>
+</body>
+</html>
