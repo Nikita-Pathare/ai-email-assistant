@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-git init
 TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")
 MODEL_NAME = "mistralai/Mistral-7B-Instruct-v0.2"
 
